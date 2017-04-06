@@ -25,7 +25,7 @@ SECRET_KEY = '0*zo@brc*ev$7!5$j(y#q5(7)ige411a=+k@&5$fl5am0!i40t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'fe-msgnc.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'msgnc.pythonanywhere.com']
 
 
 # Application definition
@@ -84,26 +84,26 @@ WSGI_APPLICATION = 'fe-msgnc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fe-msgnc',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'acokan$filterapp',
-#         'USER': 'acokan',
-#         'PASSWORD': 'filterapp',
-#         'HOST': 'acokan.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+#         'NAME': 'fe-msgnc',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'msgnc$msgnc',
+        'USER': 'msgnc',
+        'PASSWORD': 'msg123123',
+        'HOST': 'msgnc.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+    }
+}
 
 
 # Password validation
