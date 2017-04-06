@@ -156,8 +156,5 @@ REST_FRAMEWORK = {
     # Disabling Browsable API
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer'
-    ],
-    # Backend for filtering
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
-
+    ]
 }
