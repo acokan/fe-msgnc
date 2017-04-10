@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from serializers import *
@@ -9,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 @permission_classes((permissions.AllowAny,))
 class ProjectList(APIView):
 
-    def get(self, request):
+    def return_members(self):
         instance = TeamMember.objects.all()
         projects_list = []
         members_list = []
@@ -34,23 +35,24 @@ class ProjectList(APIView):
             members_list = []
             final_list.append(final_obj)
 
-        serializer = ProjectSerializer(final_list)
+        return ProjectSerializer(final_list)
+
+
+    def get(self, request):
+        serializer = self.return_members()
         return Response(serializer.data)
 
-    # def post(self, request):
-    #     fid = request.data.get('firebase_id')
-    #     pid = request.data.get('play_id')
-    #     try:
-    #         user = User.objects.get(firebase_id=fid)
-    #         play = Play.objects.get(id=pid)
-    #         try:
-    #             fav = FavouriteEvents.objects.get(user=user, play=play)
-    #             fav.delete()
-    #         except FavouriteEvents.DoesNotExist:
-    #             fav_event = FavouriteEvents(user=user, play=play)
-    #             fav_event.save()
-    #         serializer_data = get_fav_events(fid)
-    #         return Response(serializer_data, status=status.HTTP_201_CREATED)
-    #     except:
-    #         error = {"error": "Korisnik ili projekcija ne postoji!"}
-    #         return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request):
+        pid = request.data.get('project_id')
+        mid = request.data.get('member_id')
+        try:
+            member = TeamMember.objects.get(id=mid)
+            project = Project.objects.get(id=pid)
+            member.project = project
+            member.save()
+            serializer = self.return_members()
+            return Response(serializer.data)
+        except:
+            error = {"error": "Projekat ili clan tima ne postoje!"}
+            return Response(error, status=status.HTTP_400_BAD_REQUEST)
