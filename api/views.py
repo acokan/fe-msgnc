@@ -22,12 +22,14 @@ class ProjectList(APIView):
                 if p.name == i.project.name:
                     member = {
                         "role": i.role,
-                        "name": i.name
+                        "name": i.name,
+                        "id": i.id
                     }
                     members_list.append(member)
             final_obj = {
                 "team_members": members_list,
-                "name": p.name
+                "name": p.name,
+                "id": p.id
             }
             members_list = []
             final_list.append(final_obj)
